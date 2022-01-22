@@ -54,7 +54,7 @@ try:
     os.system("mkdir " + repo_name)
     os.chdir(REPO_PATH + repo_name)
     os.system("git init")
-    os.system("git remote add origin https://github.com/" + GITHUB_USER + "/" + repo_name + ".git")
+    os.system("git remote add origin git@github.com:" + GITHUB_USER + "/" + repo_name + ".git")
     os.system("echo '# " + repo_name + "' >> README.md")
     os.system("git add . && git commit -m 'Initial Commit' && git push origin master")
 except FileExistsError as err:
