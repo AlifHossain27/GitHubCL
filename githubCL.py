@@ -5,7 +5,7 @@ from simple_term_menu import TerminalMenu
 
 class GitHubCL():
     def __init__(self):
-        self.GITHUB_TOKEN = "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"
+        self.GITHUB_TOKEN = "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"
         self.API_URL = "https://api.github.com"
         self.HEADER = {
             "Authorization": "token " + self.GITHUB_TOKEN,
@@ -34,13 +34,23 @@ class GitHubCL():
             os.system(f"git clone https://github.com/AlifHossain27/{repoName}.git")
             os.chdir(self.REPO_PATH + repoName)
             os.system("code .")
+            os.system("clear")
+            print(f"{repoName} has been created successfully")
         except requests.exceptions.RequestException as err:
             raise SystemExit(err)
 
 
         
     def _deleteRepo(self):
-        pass
+        repoName = str(input("Enter repository name: "))
+        try:
+            r = requests.delete(f"{self.API_URL}/repos/{self.GITHUB_USER}/{repoName}", headers=self.HEADER)
+            r.raise_for_status()
+            os.chdir(self.REPO_PATH)
+            os.system(f"rm -r {repoName}")
+            print(f"{repoName} has been deleted")
+        except requests.exceptions.RequestException as err:
+            raise SystemExit(err)
 
     def _listRepos(self):
         pass
@@ -64,8 +74,7 @@ class GitHubCL():
                 try:
                     self._createRepo()
                 except:
-                    print("Something went wrong try again with correct info")
-                    continue
+                    print("Something went wrong please try again with valid inputs")
                 continue
             if mainOptionsChoice == "Delete a repository":
                 self._deleteRepo()
