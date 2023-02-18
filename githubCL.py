@@ -1,11 +1,12 @@
 #! /usr/bin/env python3
 import os
 import requests
+import webbrowser
 from simple_term_menu import TerminalMenu
 
 class GitHubCL():
     def __init__(self):
-        self.GITHUB_TOKEN = "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"
+        self.GITHUB_TOKEN = ""
         self.API_URL = "https://api.github.com"
         self.HEADER = {
             "Authorization": "token " + self.GITHUB_TOKEN,
